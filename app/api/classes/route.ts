@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
-import { getClasses } from "@/lib/store";
+import { getClasses, initializeStore } from "@/lib/store";
 
 export async function GET() {
-  return NextResponse.json({ classes: getClasses() });
+  await initializeStore();
+  const response = NextResponse.json({ classes: getClasses() });
+  response.headers.set("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+  return response;
 }

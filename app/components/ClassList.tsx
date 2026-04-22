@@ -1,26 +1,47 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import type { ClassItem, MockUser } from "@/types";
-import { fetchClasses } from "@/lib/api";
+import { fetchClasses, fetchCurrentUser, updateCurrentUser } from "@/lib/api";
 import { MOCK_USERS } from "@/lib/users";
 import ClassCard from "./ClassCard";
 import UserSwitcher from "./UserSwitcher";
 
 export default function ClassList() {
   const [classes, setClasses] = useState<ClassItem[]>([]);
-  const [currentUser, setCurrentUser] = useState<MockUser>(MOCK_USERS[0]);
+  const [currentUser, setCurrentUserState] = useState<MockUser>(MOCK_USERS[0]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchClasses()
-      .then((data) => setClasses(data))
-      .catch((err) => console.error("Failed to load classes", err))
-      .finally(() => setLoading(false));
+    loadClasses();
   }, []);
+
+  async function loadClasses() {
+    try {
+      setLoading(true);
+      const data = await fetchClasses();
+      setClasses(data);
+      const user = await fetchCurrentUser();
+      setCurrentUserState(user);
+    } catch (err) {
+      console.error("Failed to load classes", err);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   function handleLocalUpdate(updated: ClassItem) {
     setClasses((prev) => prev.map((c) => (c.id === updated.id ? updated : c)));
+  }
+
+  async function handleUserChange(user: MockUser) {
+    setCurrentUserState(user);
+    await updateCurrentUser(user.id);
+  }
+
+  if (!currentUser) {
+    return <p className="p-6 text-zinc-600">Loading...</p>;
   }
 
   return (
@@ -34,7 +55,15 @@ export default function ClassList() {
             Book your next class.
           </p>
         </div>
-        <UserSwitcher currentUser={currentUser} onChange={setCurrentUser} />
+        <div className="flex items-center gap-3">
+          <UserSwitcher currentUser={currentUser} onChange={handleUserChange} />
+          <Link
+            href="/my-bookings"
+            className="rounded bg-blue-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600"
+          >
+            My Bookings
+          </Link>
+        </div>
       </header>
 
       {loading ? (

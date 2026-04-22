@@ -5,5 +5,9 @@ export function isInPast(cls: ClassItem): boolean {
 }
 
 export function isFull(cls: ClassItem): boolean {
-  return cls.bookedUsers >= cls.capacity;
+  return cls.bookedUsers.length >= cls.capacity;
+}
+
+export function isUserBooked(cls: ClassItem, userId: string): boolean {
+  return cls.bookedUsers.includes(userId);
 }
