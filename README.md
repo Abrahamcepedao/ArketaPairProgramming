@@ -25,15 +25,15 @@ These came in from customers and the support team over the last couple of weeks.
 
 ---
 
-**#4821 — from customer (forwarded by CX)**
-
-> hi, i booked the morning yoga last week (pretty sure it was the 9am w/ priya) and i got charged twice. i only clicked book once. my friend said it might be cuz the wifi was slow and it retried? could be. anyway pls refund one. second time this has happened to me this month
-
----
-
 **#4839 — from the HIIT studio manager**
 
 > The studio was oversold for HIIT Express last night — more people on the roster than the room fits. Instructor was not happy. One of the booked people also never showed up which is a separate thing but maybe related? Refunds are piling up. Need to figure out what's letting this slip through.
+
+---
+
+**#4821 — from customer (forwarded by CX)**
+
+> hi, i booked the morning yoga last week (pretty sure it was the 9am w/ priya) and i got charged twice. i only clicked book once. my friend said it might be cuz the wifi was slow and it retried? could be. anyway pls refund one. second time this has happened to me this month
 
 ---
 
