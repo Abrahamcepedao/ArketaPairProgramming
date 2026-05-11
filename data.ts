@@ -16,6 +16,7 @@ export function seedClasses(): ClassItem[] {
       datetime: atOffset(1, 9),
       capacity: 10,
       bookedUsers: 3,
+      bookedUserIds: [],
     },
     {
       id: "hiit-express",
@@ -24,6 +25,7 @@ export function seedClasses(): ClassItem[] {
       datetime: atOffset(1, 18),
       capacity: 8,
       bookedUsers: 7,
+      bookedUserIds: [],
     },
     {
       id: "pilates-core",
@@ -32,6 +34,7 @@ export function seedClasses(): ClassItem[] {
       datetime: atOffset(2, 12),
       capacity: 5,
       bookedUsers: 5,
+      bookedUserIds: [],
     },
     {
       id: "sunrise-flow",
@@ -40,6 +43,7 @@ export function seedClasses(): ClassItem[] {
       datetime: atOffset(-1, 7),
       capacity: 10,
       bookedUsers: 4,
+      bookedUserIds: [],
     },
     {
       id: "spin-evening",
@@ -48,6 +52,7 @@ export function seedClasses(): ClassItem[] {
       datetime: atOffset(3, 19),
       capacity: 15,
       bookedUsers: 6,
+      bookedUserIds: [],
     },
   ];
 }

@@ -18,22 +18,32 @@ export function getClasses(): ClassItem[] {
   return getStore().classes;
 }
 
-export function bookClass(classId: string): ClassItem | null {
+export function bookClass(classId: string, userId: string): ClassItem | null {
   const store = getStore();
   const cls = store.classes.find((c) => c.id === classId);
   if (!cls) return null;
 
+  if (cls.bookedUserIds.includes(userId)) return null;
+
+  const classDate = new Date(cls.datetime);
+
+  if (classDate.getTime() < Date.now()){
+    return null;
+  }
+
+  cls.bookedUserIds.push(userId);
   cls.bookedUsers += 1;
-  console.log("[book]", classId, "→", cls.bookedUsers, "of", cls.capacity);
+  console.log("[book]", classId, "user:", userId, "→", cls.bookedUsers, "of", cls.capacity);
   return cls;
 }
 
-export function cancelBooking(classId: string): ClassItem | null {
+export function cancelBooking(classId: string, userId: string): ClassItem | null {
   const store = getStore();
   const cls = store.classes.find((c) => c.id === classId);
   if (!cls) return null;
 
+  cls.bookedUserIds = cls.bookedUserIds.filter((id) => id !== userId);
   cls.bookedUsers -= 1;
-  console.log("[cancel]", classId, "→", cls.bookedUsers, "of", cls.capacity);
+  console.log("[cancel]", classId, "user:", userId, "→", cls.bookedUsers, "of", cls.capacity);
   return cls;
 }

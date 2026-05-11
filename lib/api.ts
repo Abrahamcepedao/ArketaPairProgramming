@@ -7,12 +7,12 @@ export async function fetchClasses(): Promise<ClassItem[]> {
   return data.classes;
 }
 
-export async function bookClass(classId: string): Promise<void> {
+export async function bookClass(classId: string, userId: string): Promise<void> {
   try {
     const res = await fetch("/api/book", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ classId }),
+      body: JSON.stringify({ classId, userId }),
     });
     if (!res.ok) throw new Error("Booking failed");
   } catch (err) {

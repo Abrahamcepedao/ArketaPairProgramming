@@ -3,8 +3,8 @@ import { cancelBooking } from "@/lib/store";
 
 export async function POST(req: Request) {
   const body = await req.json();
-  const { classId } = body;
+  const { classId, userId } = body;
 
-  const updated = cancelBooking(classId);
+  const updated = cancelBooking(classId, userId);
   return NextResponse.json({ class: updated });
 }

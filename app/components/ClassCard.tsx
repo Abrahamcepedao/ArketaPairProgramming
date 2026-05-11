@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { ClassItem, MockUser } from "@/types";
 import { bookClass, cancelBooking } from "@/lib/api";
+import {userInfo} from "os";
 
 type Props = {
   classInfo: ClassItem;
@@ -27,13 +28,14 @@ export default function ClassCard({ classInfo, currentUser, onLocalUpdate }: Pro
 
   async function handleBook() {
     setPending(true);
-    onLocalUpdate({ ...classInfo, bookedUsers: classInfo.bookedUsers + 1 });
     try {
-      await bookClass(classInfo.id);
+      await bookClass(classInfo.id, currentUser.id);
+      onLocalUpdate({ ...classInfo, bookedUsers: classInfo.bookedUsers + 1 });
     } catch (err) {
       console.error(err);
     } finally {
       setPending(false);
+
     }
   }
 
