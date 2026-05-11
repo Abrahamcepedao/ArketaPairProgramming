@@ -31,6 +31,12 @@ These came in from customers and the support team over the last couple of weeks.
 
 ---
 
+**#4860 — internal, ongoing**
+
+> Getting recurring reports that bookings "aren't saving." Took a quick look — feels like maybe local state is clearing on us, could be a caching thing or localStorage. Happens after users do a few actions in a row. One user said the count on the page "jumped" after they refreshed, which might be separate, not sure. Worth digging in when someone has time.
+
+---
+
 **#4821 — from customer (forwarded by CX)**
 
 > hi, i booked the morning yoga last week (pretty sure it was the 9am w/ priya) and i got charged twice. i only clicked book once. my friend said it might be cuz the wifi was slow and it retried? could be. anyway pls refund one. second time this has happened to me this month
@@ -43,11 +49,6 @@ These came in from customers and the support team over the last couple of weeks.
 
 ---
 
-**#4860 — internal, ongoing**
-
-> Getting recurring reports that bookings "aren't saving." Took a quick look — feels like maybe local state is clearing on us, could be a caching thing or localStorage. Happens after users do a few actions in a row. One user said the count on the page "jumped" after they refreshed, which might be separate, not sure. Worth digging in when someone has time.
-
----
 
 ## Known gaps / open design questions
 
