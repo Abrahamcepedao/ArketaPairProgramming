@@ -37,7 +37,7 @@ These came in from customers and the support team over the last couple of weeks.
 
 ---
 
-**#4821 — from customer (forwarded by CX)**
+**#4821 — from partner (forwarded by CX)**
 
 > Hey, I had a weird situation in my 7am spin class this morning — one of my students showed up and I could see they were booked in twice for the same session. Has this happened to other instructors? Is there a way to prevent this on your end?
 
