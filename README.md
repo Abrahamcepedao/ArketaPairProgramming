@@ -39,7 +39,7 @@ These came in from customers and the support team over the last couple of weeks.
 
 **#4821 — from customer (forwarded by CX)**
 
-> hi, i booked the morning yoga last week (pretty sure it was the 9am w/ priya) and i got charged twice. i only clicked book once. my friend said it might be cuz the wifi was slow and it retried? could be. anyway pls refund one. second time this has happened to me this month
+> Hey, I had a weird situation in my 7am spin class this morning — one of my students showed up and I could see they were booked in twice for the same session. Has this happened to other instructors? Is there a way to prevent this on your end?
 
 ---
 
