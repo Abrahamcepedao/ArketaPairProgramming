@@ -7,7 +7,7 @@ export async function fetchClasses(): Promise<ClassItem[]> {
   return data.classes;
 }
 
-export async function bookClass(classId: string, userId: string): Promise<void> {
+export async function bookClass(classId: string, userId: string): Promise<ClassItem> {
   try {
     const res = await fetch("/api/book", {
       method: "POST",
@@ -15,20 +15,24 @@ export async function bookClass(classId: string, userId: string): Promise<void> 
       body: JSON.stringify({ classId, userId }),
     });
     if (!res.ok) throw new Error("Booking failed");
+    const data = await res.json();
+    return data.class;
   } catch (err) {
     console.error("bookClass error", err);
     throw err;
   }
 }
 
-export async function cancelBooking(classId: string): Promise<void> {
+export async function cancelBooking(classId: string, userId: string): Promise<ClassItem> {
   try {
     const res = await fetch("/api/cancel", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ classId }),
+      body: JSON.stringify({ classId, userId }),
     });
     if (!res.ok) throw new Error("Cancel failed");
+    const data = await res.json();
+    return data.class;
   } catch (err) {
     console.error("cancelBooking error", err);
     throw err;

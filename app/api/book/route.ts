@@ -7,7 +7,7 @@ export async function POST(req: Request) {
   const { classId, userId } = body;
 
   const cls = getClasses().find((c) => c.id === classId);
-  if (cls && cls.bookedUsers >= cls.capacity) {
+  if (cls && cls.bookedUserIds.length  >= cls.capacity) {
     return NextResponse.json({ error: "Class is full" }, { status: 400 });
   }
 

@@ -32,8 +32,7 @@ export function bookClass(classId: string, userId: string): ClassItem | null {
   }
 
   cls.bookedUserIds.push(userId);
-  cls.bookedUsers += 1;
-  console.log("[book]", classId, "user:", userId, "→", cls.bookedUsers, "of", cls.capacity);
+  console.log("[book]", classId, "user:", userId, "→", cls.bookedUserIds.length, "of", cls.capacity);
   return cls;
 }
 
@@ -43,7 +42,6 @@ export function cancelBooking(classId: string, userId: string): ClassItem | null
   if (!cls) return null;
 
   cls.bookedUserIds = cls.bookedUserIds.filter((id) => id !== userId);
-  cls.bookedUsers -= 1;
-  console.log("[cancel]", classId, "user:", userId, "→", cls.bookedUsers, "of", cls.capacity);
+  console.log("[cancel]", classId, "user:", userId, "→", cls.bookedUserIds.length, "of", cls.capacity);
   return cls;
 }

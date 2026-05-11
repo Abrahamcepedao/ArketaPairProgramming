@@ -4,7 +4,6 @@ export type ClassItem = {
   instructor: string;
   datetime: string;
   capacity: number;
-  bookedUsers: number;
   bookedUserIds: string[];
 };
 

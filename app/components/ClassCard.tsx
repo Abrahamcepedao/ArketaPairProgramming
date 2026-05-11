@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import type { ClassItem, MockUser } from "@/types";
-import { bookClass, cancelBooking } from "@/lib/api";
-import {userInfo} from "os";
+import { bookClass } from "@/lib/api";
 
 type Props = {
   classInfo: ClassItem;
@@ -24,26 +23,13 @@ function formatWhen(iso: string): string {
 
 export default function ClassCard({ classInfo, currentUser, onLocalUpdate }: Props) {
   const [pending, setPending] = useState(false);
-  const spotsLeft = classInfo.capacity - classInfo.bookedUsers;
+  const spotsLeft = classInfo.capacity - classInfo.bookedUserIds.length;
 
   async function handleBook() {
     setPending(true);
     try {
-      await bookClass(classInfo.id, currentUser.id);
-      onLocalUpdate({ ...classInfo, bookedUsers: classInfo.bookedUsers + 1 });
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setPending(false);
-
-    }
-  }
-
-  async function handleCancel() {
-    setPending(true);
-    onLocalUpdate({ ...classInfo, bookedUsers: classInfo.bookedUsers - 1 });
-    try {
-      await cancelBooking(classInfo.id);
+      const updated = await bookClass(classInfo.id, currentUser.id);
+      onLocalUpdate(updated);
     } catch (err) {
       console.error(err);
     } finally {
@@ -65,27 +51,20 @@ export default function ClassCard({ classInfo, currentUser, onLocalUpdate }: Pro
       <div className="text-sm text-zinc-700 dark:text-zinc-300">
         <div>{formatWhen(classInfo.datetime)}</div>
         <div>
-          {classInfo.bookedUsers} of {classInfo.capacity} booked
-          {spotsLeft > 0 ? ` · ${spotsLeft} spots left` : ""}
+          {
+            spotsLeft > 0 ? `${classInfo.bookedUserIds.length} of ${classInfo.capacity} booked · ${spotsLeft} spots left ` : "Not spots left"
+          }
         </div>
       </div>
 
       <div className="mt-1 flex gap-2">
         <button
           onClick={handleBook}
-          disabled={pending}
+          disabled={pending || spotsLeft === 0}
           aria-label={`Book ${classInfo.name} as ${currentUser.name}`}
           className="rounded bg-zinc-900 px-3 py-1.5 text-sm font-medium text-white hover:bg-zinc-700 disabled:opacity-50 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300"
         >
           Book
-        </button>
-        <button
-          onClick={handleCancel}
-          disabled={pending}
-          aria-label={`Cancel ${classInfo.name} as ${currentUser.name}`}
-          className="rounded border border-zinc-300 bg-white px-3 py-1.5 text-sm font-medium text-zinc-900 hover:bg-zinc-100 disabled:opacity-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
-        >
-          Cancel
         </button>
       </div>
     </div>
