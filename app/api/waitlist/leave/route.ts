@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { cancelBooking } from "@/lib/store";
+import { leaveWaitlist } from "@/lib/store";
 
 export async function POST(req: Request) {
   const body = await req.json();
@@ -9,11 +9,11 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "classId and userId are required" }, { status: 400 });
   }
 
-  const updated = await cancelBooking(classId, userId);
+  const result = await leaveWaitlist(classId, userId);
 
-  if (!updated) {
-    return NextResponse.json({ error: "Booking not found" }, { status: 404 });
+  if (!result) {
+    return NextResponse.json({ error: "Not on waitlist" }, { status: 404 });
   }
 
-  return NextResponse.json({ class: updated });
+  return NextResponse.json({ class: result });
 }

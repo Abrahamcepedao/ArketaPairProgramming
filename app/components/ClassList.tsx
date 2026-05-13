@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import type { ClassItem, MockUser } from "@/types";
 import { fetchClasses } from "@/lib/api";
 import { MOCK_USERS } from "@/lib/users";
 import ClassCard from "./ClassCard";
 import UserSwitcher from "./UserSwitcher";
+import NotificationBell from "./NotificationBell";
 
 export default function ClassList() {
   const [classes, setClasses] = useState<ClassItem[]>([]);
@@ -34,7 +36,16 @@ export default function ClassList() {
             Book your next class.
           </p>
         </div>
-        <UserSwitcher currentUser={currentUser} onChange={setCurrentUser} />
+        <div className="flex items-center gap-4">
+          <NotificationBell userId={currentUser.id} />
+          <Link
+            href="/my-bookings"
+            className="text-sm text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+          >
+            My Bookings →
+          </Link>
+          <UserSwitcher currentUser={currentUser} onChange={setCurrentUser} />
+        </div>
       </header>
 
       {loading ? (

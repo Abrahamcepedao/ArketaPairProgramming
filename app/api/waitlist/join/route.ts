@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { bookClass } from "@/lib/store";
+import { joinWaitlist } from "@/lib/store";
 
 export async function POST(req: Request) {
   const body = await req.json();
@@ -9,7 +9,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "classId and userId are required" }, { status: 400 });
   }
 
-  const result = await bookClass(classId, userId);
+  const result = await joinWaitlist(classId, userId);
 
   if (!result.ok) {
     const status = result.error === "not_found" ? 404 : 400;
