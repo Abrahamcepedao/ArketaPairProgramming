@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Class not found" }, { status: 404 });
   }
 
-  if (cls.bookedUsers >= cls.capacity) {
+  if (cls.bookedUsers > cls.capacity) {
     return NextResponse.json({ error: "Class is full" }, { status: 400 });
   }
 
