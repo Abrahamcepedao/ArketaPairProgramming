@@ -7,7 +7,17 @@ export async function POST(req: Request) {
   const { classId } = body;
 
   const cls = getClasses().find((c) => c.id === classId);
-  if (cls && cls.bookedUsers > cls.capacity) {
+  if (!cls) {
+    return NextResponse.json({ error: "Class not found" }, { status: 404 });
+  }
+
+  const now = new Date();
+  const classDate = new Date(cls.datetime);
+  if (classDate < now) {
+    return NextResponse.json({ error: "Cannot book a class in the past" }, { status: 400 });
+  }
+
+  if (cls.bookedUsers >= cls.capacity) {
     return NextResponse.json({ error: "Class is full" }, { status: 400 });
   }
 
