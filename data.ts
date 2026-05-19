@@ -37,7 +37,7 @@ export function seedClasses(): ClassItem[] {
       id: "sunrise-flow",
       name: "Sunrise Flow",
       instructor: "Devon Park",
-      datetime: atOffset(-1, 7),
+      datetime: atOffset(2, 7),
       capacity: 10,
       bookedUsers: 4,
     },
